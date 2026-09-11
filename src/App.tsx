@@ -190,7 +190,7 @@ function App() {
           email,
           {
             redirectTo:
-              'http://localhost:5173',
+              window.location.origin,
           }
         )
 
