@@ -736,8 +736,9 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
   )
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+    <div className="documentos-page" style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
       <div
+        className="documentos-header"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -773,7 +774,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
       )}
 
       <div
-        className="page-card"
+        className="page-card documentos-subida-card"
         style={{
           marginBottom: '20px',
           display: 'grid',
@@ -781,11 +782,12 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
           gap: '20px',
         }}
       >
-        <div>
+        <div className="documentos-subida-form">
           <h2 style={{ marginTop: 0 }}>➕ Subir documento</h2>
 
           <form onSubmit={subirDocumento}>
             <div
+              className="documentos-subida-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -830,6 +832,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
                   accept="application/pdf,image/*"
                   onChange={(e) => setArchivo(e.target.files?.[0] ?? null)}
                   required
+                  className="documentos-file-input"
                   style={{ width: '100%', marginTop: '7px' }}
                 />
                 <small style={{ color: 'var(--text-soft)' }}>
@@ -856,6 +859,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
         </div>
 
         <div
+          className="documentos-drive-card"
           style={{
             border: '1px solid var(--border)',
             borderRadius: '14px',
@@ -894,8 +898,9 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
         </div>
       </div>
 
-      <div className="page-card" style={{ marginBottom: '20px' }}>
+      <div className="page-card documentos-filtros-card" style={{ marginBottom: '20px' }}>
         <div
+          className="documentos-filtros-header"
           style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -917,6 +922,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
         </div>
 
         <div
+          className="documentos-filtros-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
@@ -924,7 +930,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
             marginTop: '20px',
           }}
         >
-          <div style={{ gridColumn: 'span 2' }}>
+          <div className="documentos-busqueda-campo" style={{ gridColumn: 'span 2' }}>
             <label>Buscar</label>
             <input
               type="search"
@@ -1039,7 +1045,7 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
         </div>
       </div>
 
-      <div className="page-card">
+      <div className="page-card documentos-lista-card">
         <div
           style={{
             display: 'flex',
@@ -1203,6 +1209,142 @@ function Documentos({ onVolver, rol }: DocumentosProps) {
           </div>
         )}
       </div>
+
+      <style>{`
+        .documentos-page,
+        .documentos-page * {
+          box-sizing: border-box;
+        }
+
+        .documentos-page {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .documentos-page .page-card,
+        .documentos-subida-form,
+        .documentos-drive-card,
+        .documentos-filtros-grid > div {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .documentos-page input,
+        .documentos-page select,
+        .documentos-page textarea,
+        .documentos-page button {
+          max-width: 100%;
+        }
+
+        .documentos-file-input {
+          min-width: 0;
+          overflow: hidden;
+        }
+
+        @media (max-width: 760px) {
+          .documentos-page {
+            padding: 12px !important;
+            overflow-x: hidden;
+          }
+
+          .documentos-header {
+            align-items: flex-start !important;
+            margin-bottom: 18px !important;
+          }
+
+          .documentos-header > div {
+            width: 100%;
+          }
+
+          .documentos-header h1 {
+            font-size: clamp(28px, 9vw, 38px);
+            line-height: 1.08;
+            overflow-wrap: anywhere;
+          }
+
+          .documentos-header button {
+            width: 100%;
+          }
+
+          .documentos-subida-card {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 16px !important;
+          }
+
+          .documentos-subida-grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+          }
+
+          .documentos-drive-card {
+            width: 100%;
+            padding: 15px !important;
+          }
+
+          .documentos-drive-card h2,
+          .documentos-subida-form h2,
+          .documentos-filtros-card h2,
+          .documentos-lista-card h2 {
+            font-size: 24px;
+            line-height: 1.15;
+            overflow-wrap: anywhere;
+          }
+
+          .documentos-filtros-header {
+            align-items: stretch !important;
+          }
+
+          .documentos-filtros-header > div {
+            width: 100%;
+          }
+
+          .documentos-filtros-header > button {
+            width: 100%;
+          }
+
+          .documentos-filtros-grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 13px !important;
+          }
+
+          .documentos-busqueda-campo {
+            grid-column: 1 / -1 !important;
+          }
+
+          .documentos-page input,
+          .documentos-page select,
+          .documentos-page textarea {
+            width: 100% !important;
+            min-width: 0 !important;
+            font-size: 16px;
+          }
+
+          .documentos-page input[type='file'] {
+            padding: 8px;
+            font-size: 14px;
+          }
+
+          .documentos-page .page-card {
+            width: 100%;
+            min-width: 0;
+            padding: 16px !important;
+            overflow: hidden;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .documentos-page {
+            padding: 8px !important;
+          }
+
+          .documentos-page .page-card {
+            padding: 14px !important;
+          }
+
+          .documentos-drive-card {
+            padding: 13px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
